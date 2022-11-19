@@ -1,38 +1,93 @@
-.App {
-  text-align: center;
+Body {
+    background-color: #031221;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main {
+    margin-right: 50px;
+    padding-top: 25px;
+    padding-left: 30px;
+    width: 350px;
+    height: 250px;
+    border: 2px solid #8dc4ea;
+    border-radius: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.container {
+    box-sizing: border-box;
+
 }
 
-.App-link {
-  color: #61dafb;
+.count-box {
+    box-sizing: border-box;
+    width: 320px;
+    height: 150px;
+    background-color: #8dc4ea;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-top: 30px;
+}
+.count-value{
+    color: #031221;
+    font-size: 70px;
+    font-weight: 800;
+}
+.count-limit {
+    font-size: 5em;
+    color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.click-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 320px;
+    height: 60px;
+    border: 2px solid #8dc4ea;
+    border-radius: 5px;
+}
+
+/*button*/
+.button {
+    width: 100px;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 600;
+    background-color: #8dc4ea;
+    color: #031221;
+    border: 0;
+    border-radius: 2px;
+}
+
+.button:hover {
+    background-color: #afd3ec;
+}
+
+.button:active {
+    background-color: #d3d8dc;
+}
+.disabled{
+    opacity: .4;
+}
+/*input*/
+.input {
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 50%;
+    height: 30px;
+    border-radius: 5px;
+    border: 0;
+}
+.label{
+    color: #031221;
+    font-size: 25px;
+    font-weight: 800;
 }
