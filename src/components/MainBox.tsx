@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../App.css';
 import CounterBox from "./CounterBox";
 import ValueBox from "./ValueBox";
@@ -6,18 +6,20 @@ import {restoreState, saveState} from "../local-storage/localStorage";
 
 const MainBox = () => {
     const [counter, setCounter] = useState(0)
-    const [maxCount, setMaxCount] = useState(0)
+    const [maxCount, setMaxCount] = useState(5)
     const [minCount, setMinCount] = useState(0)
 
+    useEffect(() => {
+        setMaxCount(restoreState('max'))
+    }, [])
 
     const setValue = () => {
         resetValue()
-        const value = restoreState('max')
-        if (value)
-            setMaxCount(value)
+        saveState('max',maxCount)
     }
+
     const maxValueInput = (value: number) => {
-        saveState('max', value)
+        setMaxCount(value)
     }
     const minValueInput = (value: number) => {
         setMinCount(value)
@@ -31,11 +33,12 @@ const MainBox = () => {
     const resetValue = () => {
         setCounter(minCount)
     }
+
     return (
         <div className={'app'}>
-            <ValueBox maxValueInput={maxValueInput} minValueInput={minValueInput}
+            <ValueBox maxValueInput={maxValueInput} maxCount={maxCount} minCount={minCount} minValueInput={minValueInput}
                       setValue={setValue}/>
-            <CounterBox incValue={incValue} resetValue={resetValue} counter={counter} maxCounter={maxCount}/>
+            <CounterBox incValue={incValue} resetValue={resetValue} counter={counter} maxCount={maxCount} minCount={minCount}/>
         </div>
     );
 };

@@ -1,28 +1,30 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Buttons} from "./Buttons";
 
 type CounterBoxPropsType = {
     counter:number,
-    maxCounter:number
+    maxCount:number
+    minCount:number
     incValue:()=>void
     resetValue:()=>void
 }
 
 const CounterBox:FC<CounterBoxPropsType> = ({
                                                 counter,
-                                                maxCounter,
+                                                maxCount,
+                                                minCount,
                                                 incValue,
                                                 resetValue}) => {
     return (
         <div className={'main'}>
             <div className='container'>
                 <div className={'count-box'}>
-                    <div className={counter === maxCounter ? 'count-value count-limit' : 'count-value'}>
-                        {counter}</div>
+                    {maxCount <= minCount || minCount < 0 ? <div className={'incorrect-value'}>Incorrect value!</div> :
+                    <div className={counter === maxCount ? 'count-value count-limit' : 'count-value'}>{counter}</div>}
                 </div>
                 <div className={'click-box'}>
-                    <div className={counter === maxCounter ? 'disabled' : ''}>
-                        <Buttons name={"inc"} incValue={incValue} />
+                    <div className={counter === maxCount ? 'disabled' : ''}>
+                        <Buttons name={"inc"} incValue={incValue}/>
                     </div>
                     <Buttons name={"reset"} resetValue={resetValue} />
                 </div>

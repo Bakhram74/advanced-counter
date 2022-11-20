@@ -77,6 +77,14 @@ Body {
 .disabled{
     opacity: .4;
 }
+.incorrect-value{
+    box-sizing: border-box;
+    padding-top: 25px;
+    font-size: 25px;
+    color: red;
+    opacity: .8;
+    font-weight: 600;
+}
 /*input*/
 .input {
     margin-top: 10px;
@@ -88,6 +96,12 @@ Body {
     text-align: center;
     font-size: 18px;
     color: #031221;
+}
+.error-input{
+    box-sizing: border-box;
+    border:2px solid red ;
+    color: red;
+    opacity: .8;
 }
 .label{
     color: #031221;

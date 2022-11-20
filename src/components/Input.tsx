@@ -8,11 +8,9 @@ const Input = (props:InputPropsType) => {
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) =>{
         if (props.maxValueInput){
             props.maxValueInput (+e.currentTarget.value)
-            console.log('max' +e.currentTarget.value)
         }
         if (props.minValueInput){
             props.minValueInput (+e.currentTarget.value)
-            console.log('min' +e.currentTarget.value)
         }
     }
     return (
