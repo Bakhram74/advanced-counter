@@ -5,14 +5,18 @@ type ButtonsPropsType = {
     name: string
     incValue?: () => void
     resetValue?: () => void
+    setValue?: () => void
 }
-export const Buttons: FC<ButtonsPropsType> = ({name, incValue, resetValue}) => {
+export const Buttons: FC<ButtonsPropsType> = ({name, incValue, resetValue, setValue}) => {
     const onclickHandler = () => {
         if (name === 'inc' && incValue) {
             incValue()
         }
         if (name === 'reset' && resetValue) {
             resetValue()
+        }
+        if (name === 'set' && setValue) {
+            setValue()
         }
     }
     return (

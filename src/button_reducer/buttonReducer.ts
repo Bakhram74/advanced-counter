@@ -1,6 +1,8 @@
 import React from "react";
 
-const buttonReducer=()=>{
+
+
+const buttonReducer=(state:any,action:any)=>{
 
 }
 
