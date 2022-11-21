@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FC} from "react";
-import {Buttons} from "./Buttons";
+import {Button} from "./Button";
 import {AbleButtonType} from "./MainBox";
 
 type ValueBoxPropsType = {
@@ -30,6 +30,7 @@ const ValueBox: FC<ValueBoxPropsType> = ({
         minValueInput(+e.currentTarget.value)
         makeAbleButton(1)
     }
+    const isDisableSet = isDisable === 2 || minCount >= maxCount
     return (
         <div className={"main"}>
             <div className={'container'}>
@@ -45,8 +46,8 @@ const ValueBox: FC<ValueBoxPropsType> = ({
                            type="number" id="value"/>
                 </div>
                 <div className={'click-box'}>
-                    <div className={isDisable === 2 ? 'disabled' : ''}>
-                        <Buttons name={'set'} setValue={setValue}/>
+                    <div>
+                        <Button isDisabled={isDisableSet} name={'set'} setValue={setValue}/>
                     </div>
                 </div>
             </div>

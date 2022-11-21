@@ -7,8 +7,9 @@ type ButtonsPropsType = {
     incValue?: () => void
     resetValue?: () => void
     setValue?: () => void
+    isDisabled:boolean
 }
-export const Buttons: FC<ButtonsPropsType> = ({name, incValue, resetValue, setValue}) => {
+export const Button: FC<ButtonsPropsType> = ({name, incValue, resetValue, setValue,isDisabled}) => {
     const onclickHandler = () => {
         if (name === 'inc' && incValue) {
             incValue()
@@ -22,7 +23,7 @@ export const Buttons: FC<ButtonsPropsType> = ({name, incValue, resetValue, setVa
     }
     return (
         <div>
-            <button onClick={onclickHandler}
+            <button disabled={isDisabled} onClick={onclickHandler}
                     className={'button'}>{name}</button>
         </div>
     );

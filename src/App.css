@@ -75,9 +75,9 @@ Body {
 .button:active {
     background-color: #d3d8dc;
 }
-.disabled{
+button:disabled{
     pointer-events: none;
-    opacity: .4;
+        opacity: .4;
 }
 .incorrect-value{
     box-sizing: border-box;

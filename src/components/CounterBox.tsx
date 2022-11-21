@@ -1,5 +1,5 @@
 import React, {ButtonHTMLAttributes, FC, useEffect, useState} from 'react';
-import {Buttons} from "./Buttons";
+import {Button} from "./Button";
 import {AbleButtonType} from "./MainBox";
 
 type CounterBoxPropsType = {
@@ -19,6 +19,8 @@ const CounterBox: FC<CounterBoxPropsType> = ({
                                                  resetValue,
                                                  isDisable
                                              }) => {
+    const disabledIncrement = counter === maxCount || isDisable === 1
+    const disabledReset = isDisable === 1
     return (
         <div className={'main'}>
             <div className='container'>
@@ -28,11 +30,11 @@ const CounterBox: FC<CounterBoxPropsType> = ({
                             className={counter === maxCount ? 'count-value count-limit' : 'count-value'}>{counter}</div>}
                 </div>
                 <div className={'click-box'}>
-                        <div className={counter === maxCount ||isDisable === 1  ? 'disabled' : ''}>
-                            <Buttons name={"inc"} incValue={incValue}/>
+                        <div>
+                            <Button isDisabled={disabledIncrement} name={"inc"} incValue={incValue}/>
                         </div>
-                    <div className={isDisable === 1 ? 'disabled' : ''}>
-                        <Buttons name={"reset"} resetValue={resetValue}/>
+                    <div>
+                        <Button isDisabled={disabledReset} name={"reset"} resetValue={resetValue}/>
                     </div>
                 </div>
             </div>
