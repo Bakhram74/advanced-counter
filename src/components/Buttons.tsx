@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
 import '../App.css';
+import {AbleButtonType} from "./MainBox";
 
 type ButtonsPropsType = {
     name: string
