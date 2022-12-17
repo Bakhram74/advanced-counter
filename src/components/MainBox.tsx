@@ -1,52 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import '../App.css';
 import CounterBox from "./CounterBox";
 import ValueBox from "./ValueBox";
-import {restoreState, saveState} from "../local-storage/localStorage";
+import {restoreState, saveState, saveMaxValue} from "../local-storage/localStorage";
+import {AbleButtonType, changeValueAC, getMaxValue, setIsDisableAC, setMaxValueAC} from "../store/countReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../store/store";
 
-export type AbleButtonType = 1 | 2
 const MainBox = () => {
-    const [counter, setCounter] = useState(0)
-    const [maxCount, setMaxCount] = useState(5)
-    const [minCount, setMinCount] = useState(0)
-    const [isDisable, setIsDisable] = useState<AbleButtonType>(1)
+    const maxCount = useSelector<RootStateType, number>(state => state.counter.maxValue)
+    const minCount = useSelector<RootStateType, number>(state => state.counter.minValue)
+    const isDisable = useSelector<RootStateType, AbleButtonType>(state => state.counter.isDisable)
+    const dispatch = useDispatch()
 
-    const makeAbleButton = (value: AbleButtonType) => {
-        setIsDisable(value)
-    }
 
     useEffect(() => {
-        setMaxCount(restoreState('max'))
+         dispatch(setMaxValueAC(restoreState('max')))
+        //  getMaxValue()
     }, [])
 
     const setValue = () => {
-        setIsDisable(2)
+        dispatch(setIsDisableAC(2))
         resetValue()
-        saveState('max', maxCount)
+        saveMaxValue(maxCount)
     }
 
-    const maxValueInput = (value: number) => {
-        setMaxCount(value)
-    }
-    const minValueInput = (value: number) => {
-        setMinCount(value)
-    }
-    // counter-box
-    const incValue = () => {
-        if (counter === maxCount)
-            return
-        setCounter(counter + 1)
-    }
     const resetValue = () => {
-        setCounter(minCount)
+        dispatch(changeValueAC(minCount))
     }
 
     return (
         <div className={'app'}>
-            <ValueBox maxValueInput={maxValueInput} maxCount={maxCount} minCount={minCount}
-                      makeAbleButton={makeAbleButton} isDisable={isDisable}
-                      minValueInput={minValueInput} setValue={setValue}/>
-            <CounterBox incValue={incValue} resetValue={resetValue} counter={counter} maxCount={maxCount}
+
+            <ValueBox setValue={setValue} maxCount={maxCount} minCount={minCount} isDisable={isDisable}/>
+            <CounterBox resetValue={resetValue}
                         minCount={minCount} isDisable={isDisable}/>
         </div>
     );

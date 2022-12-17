@@ -1,34 +1,33 @@
 import React, {ChangeEvent, FC} from "react";
 import {Button} from "./Button";
-import {AbleButtonType} from "./MainBox";
+import {AbleButtonType, setIsDisableAC, setMaxValueAC, setMinValueAC} from "../store/countReducer";
+import {useDispatch} from "react-redux";
+
+
 
 type ValueBoxPropsType = {
     setValue: () => void
-    maxValueInput: (value: number) => void
-    minValueInput: (value: number) => void
     maxCount: number
     minCount: number
-    makeAbleButton: (value: AbleButtonType) => void
     isDisable: AbleButtonType
 }
 
 const ValueBox: FC<ValueBoxPropsType> = ({
                                              setValue,
-                                             minValueInput,
-                                             maxValueInput,
                                              maxCount,
                                              minCount,
-                                             makeAbleButton,
                                              isDisable
                                          }) => {
+    const dispatch = useDispatch()
 
     const maxValueInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        maxValueInput(+e.currentTarget.value)
-        makeAbleButton(1)
+
+        dispatch(setMaxValueAC(+e.currentTarget.value))
+        dispatch(setIsDisableAC(1))
     }
     const minValueInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        minValueInput(+e.currentTarget.value)
-        makeAbleButton(1)
+        dispatch(setMinValueAC(+e.currentTarget.value))
+        dispatch(setIsDisableAC(1))
     }
     const isDisableSet = isDisable === 2 || minCount >= maxCount
     return (
@@ -47,7 +46,7 @@ const ValueBox: FC<ValueBoxPropsType> = ({
                 </div>
                 <div className={'click-box'}>
                     <div>
-                        <Button isDisabled={isDisableSet} name={'set'} setValue={setValue}/>
+                        <Button isDisabled={isDisableSet} name={'set'} callback={setValue}/>
                     </div>
                 </div>
             </div>

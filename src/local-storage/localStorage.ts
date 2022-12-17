@@ -8,3 +8,7 @@ export function restoreState(key: string) {
     if (stateAsString)
         return JSON.parse(stateAsString)
 }
+
+export const saveMaxValue = (maxValue: number) => {
+    saveState('max', maxValue)
+}
