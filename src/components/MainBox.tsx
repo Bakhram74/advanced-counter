@@ -2,27 +2,33 @@ import React, {useEffect} from 'react';
 import '../App.css';
 import CounterBox from "./CounterBox";
 import ValueBox from "./ValueBox";
-import {restoreState, saveState, saveMaxValue} from "../local-storage/localStorage";
-import {AbleButtonType, changeValueAC, getMaxValue, setIsDisableAC, setMaxValueAC} from "../store/countReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {RootStateType} from "../store/store";
+import {
+    changeValueAC,
+    getMaxValue,
+    isDisabled,
+    maxValue,
+    minValue,
+    setIsDisableAC,
+} from "../store/countReducer";
+import {useDispatch} from "react-redux";
+import {RootStateType, useAppSelector} from "../store/store";
+import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 const MainBox = () => {
-    const maxCount = useSelector<RootStateType, number>(state => state.counter.maxValue)
-    const minCount = useSelector<RootStateType, number>(state => state.counter.minValue)
-    const isDisable = useSelector<RootStateType, AbleButtonType>(state => state.counter.isDisable)
-    const dispatch = useDispatch()
+    const maxCount = useAppSelector(maxValue)
+    const minCount = useAppSelector(minValue)
+    const isDisable = useAppSelector(isDisabled)
+
+    const dispatch = useDispatch() as ThunkDispatch<RootStateType, {}, AnyAction>
 
 
     useEffect(() => {
-         dispatch(setMaxValueAC(restoreState('max')))
-        //  getMaxValue()
+        dispatch(getMaxValue())
     }, [])
 
     const setValue = () => {
         dispatch(setIsDisableAC(2))
         resetValue()
-        saveMaxValue(maxCount)
     }
 
     const resetValue = () => {

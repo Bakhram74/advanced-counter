@@ -4,11 +4,12 @@ export const saveState = (key: string, state: number) => {
 }
 
 export function restoreState(key: string) {
-    const stateAsString = localStorage.getItem(key)
-    if (stateAsString)
-        return JSON.parse(stateAsString)
-}
+    try {
+        const stateAsString = localStorage.getItem(key)
+        if (stateAsString)
+            return JSON.parse(stateAsString)
+        } catch (err) {
+        return undefined;
+    }
 
-export const saveMaxValue = (maxValue: number) => {
-    saveState('max', maxValue)
 }
